@@ -6,4 +6,5 @@ function connect_BD() {
     $dbname   = "php_exam_db";//Name of the database
     return new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
 }
+
 ?>

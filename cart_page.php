@@ -1,9 +1,6 @@
 <?php
 session_start();
-// if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-//   header('Location: login_page.php');
-//   exit;
-// }
+
 // Check if the logout button was submitted
 if (isset($_POST['logout'])) {
   session_destroy();
@@ -24,6 +21,7 @@ if (isset($_POST['logout'])) {
         <li><a href="index.php">Home</a></li>
         <li><a href="profile_page.php">Profile</a></li>
         <li><a href="cart_page.php">Cart</a></li>
+        <li><a href="sell_page.php">Sell</a></li>
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
           <input type="submit" name="logout" value="Logout">
         </form>

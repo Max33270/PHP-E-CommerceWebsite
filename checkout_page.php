@@ -2,7 +2,6 @@
 session_start();
 
 // Check if the logout button was submitted
-// test
 if (isset($_POST['logout'])) {
   session_destroy();
   header('Location: login_page.php');
