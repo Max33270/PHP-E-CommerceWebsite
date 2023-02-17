@@ -34,8 +34,9 @@ if (isset($_GET['id'])) {
       <p><?= $card['Pseudo']?></p>
       <p><?= $card['Description']?></p>
       <p><?= $card['Price']. "€"?></p>
-      <form action="index.php" method="post">
-        <button>Ajouter au panier</button>
+      <form action="cart_page.php" method="get">
+        <input type="hidden" name="id" value="<?= $card['Article_id']; ?>">
+        <button type="submit">Ajouter au panier</button>
       </form>
     </div>
 </body>

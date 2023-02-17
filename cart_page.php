@@ -1,86 +1,157 @@
 <?php
+require_once './connect_bd.php';
 session_start();
 
-// Check if the logout button was submitted
-if (isset($_POST['logout'])) {
-  session_destroy();
-  header('Location: login_page.php');
-  exit;
-}
-?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="styles/cart.css">
-</head>
-<body>
-  <header class="header">
-    <nav>
-      <ul>
-        <li><a href="index.php">Home</a></li>
-        <li><a href="profile_page.php">Profile</a></li>
-        <li><a href="cart_page.php">Cart</a></li>
-        <li><a href="sell_page.php">Sell</a></li>
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-          <input type="submit" name="logout" value="Logout">
-        </form>
-      </ul>
-    </nav>
-  </header>
-  <form action="#" method="post">
-    <input type="submit" name="logout" value="Logout">
-  </form>
-  <h1>Shopping Cart</h1>
-  <div class="container">
-    <input type="checkbox">
-    <img src="pics/taco.jpeg" alt="Product Image">
-    <div class="details">
-      <h3 class="title">Taco Dinosaur</h3>
-      <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-        molestiae quas vel sint commodi repudiandae consequunt...
-      <div class="quantity">
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" value="1" min="1">
-      </div>
-      <div class="discount">
-        <label for="discount">Discount Code:</label> &#160 &#160
-        <input type="text" id="discount" placeholder="Enter code here">
-      </div>
-      <p class="price">Price: $<span id="price"></span></p>
-      <button class="delete-btn">Delete</button>
-    </div>
-  </div>
-  <input id="quantity-input" type="number" style="display: none" />
-  </div>
-  </div>
-  <a href="checkout_page.php" class="checkout">Proceed to checkout</a>
-  <h2> Subtotal (1 item): $10 </h2>
-  <p class="discount-subtotal"> Discounts : 3% off </p>
-  <script>
-    const quantityInput = document.getElementById("quantity");
-    const priceSpan = document.getElementById("price");
-    const itemPrice = 10;
-    quantityInput.addEventListener("input", function () {
-      const quantity = this.value;
-      const price = itemPrice * quantity;
-      priceSpan.textContent = price;
-    });
-    function updateQuantityField() {
-      let quantityDropdown = document.getElementById("quantity-dropdown");
-      let selectedValue = quantityDropdown.value;
-      let quantityInput = document.getElementById("quantity-input");
-      if (selectedValue === "10+") {
-        quantityInput.style.display = "inline-block";
-        quantityDropdown.style.display = "none";
-      } else {
-        quantityInput.style.display = "none";
-        quantityDropdown.style.display = "inline-block";
-      }
+$BD = connect_BD();
+
+// Check if the ID is set in the URL and retrieve the card data with the matching ID
+if (isset($_GET['id'])) {
+  $article_id = $_GET['id'];
+  $article_query = "SELECT * FROM article JOIN user ON article.User_id = user.User_id WHERE article.Article_id = '$article_id'";
+  $article_data = $BD->prepare($article_query);
+  $article_data->execute();
+  $article = $article_data->fetch();
+
+  if (!isset($_SESSION['panier'])) {
+    $_SESSION['panier'] = array();
+  }
+
+  $article_already_in_cart = false;
+  foreach ($_SESSION['panier'] as $cart_item) {
+    if ($cart_item['Article_id'] == $article['Article_id']) {
+      $article_already_in_cart = true;
+      break;
     }
-    document.querySelector('.delete-btn').addEventListener('click', function () {
-      this.parentNode.parentNode.remove();
-    });
-  </script>
-</body>
+  }
+
+  if (!$article_already_in_cart) {
+    array_push($_SESSION['panier'], $article);
+  }
+}
+
+// Check if the remove button was clicked and remove the corresponding card from the cart array
+if (isset($_POST['del_element'])) {
+  $index = $_POST['index'];
+  unset($_SESSION['panier'][$index]);
+  $_SESSION['panier'] = array_values($_SESSION['panier']);
+}
+
+// Check if the clear button was clicked and clear the cart array
+if (isset($_POST['delete'])) {
+  unset($_SESSION['panier']);
+}
+
+
+$total = 0;
+if(isset($_SESSION['panier']) && count($_SESSION['panier']) > 0) { 
+  foreach ($_SESSION['panier'] as $index => $article) {
+    $total += $article['Price'];
+  }
+}
+
+$error_solde = "";
+if(isset($_POST['confirm']) && $total > 0 && $total <= $_SESSION['solde']) {
+  $_SESSION['solde'] = $_SESSION['solde'] - $total;
+  unset($_SESSION['panier']);
+  $query_solde = "UPDATE user SET Solde = ? WHERE User_id = ?";
+  $solde_update = $BD->prepare($query_solde);
+  $solde_update->bindValue(1, $_SESSION['solde'], PDO::PARAM_INT);
+  $solde_update->bindValue(2, $_SESSION['user_id'], PDO::PARAM_INT);
+  $solde_update->execute();
+  $total = 0;
+  header('Location: index.php');
+} else if(isset($_POST['confirm']) && $total > $_SESSION['solde']){
+  $error_solde = "Solde manquant";
+}
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/cart.css">
+    <title>Cart</title>
+</head>
+
+<script>
+  // Sélectionnez la navbar
+  const navbar = document.querySelector('.header');
+
+  // Récupérez la position de défilement de la page
+  const offsetTop = navbar.offsetTop;
+
+  // Ajoutez une classe "sticky" à la navbar lorsque vous faites défiler vers le bas
+  function stickyNavbar() {
+    if (window.pageYOffset >= offsetTop) {
+      navbar.classList.add("sticky");
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  }
+
+  // Écoutez l'événement de défilement de la page et appelez la fonction stickyNavbar()
+  window.onscroll = function() {stickyNavbar()};
+</script>
+
+<header class="header sticky">
+  <nav>
+    <ul>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="profile_page.php">Profile</a></li>
+      <li><a href="cart_page.php">Cart</a></li>
+      <li><a href="sell_page.php">Sell</a></li>
+    </ul>
+  </nav>
+</header>
+<form action="#" method="post">
+  <input type="submit" name="logout" value="Logout">
+</form>
+
+<body>
+  <h1>Votre panier</h1>
+
+  <?php 
+  if (isset($_SESSION['panier']) && count($_SESSION['panier']) > 0) { 
+    foreach ($_SESSION['panier'] as $index => $article) {
+  ?>
+    <div class="card">
+      <p><?= $article['Name']?></p>
+      <p><?= $article['Description']?></p>
+      <p><?= $article['Price']?></p>
+      <form action="#" method="post">
+        <input type="hidden" name="index" value="<?= $index ?>">
+        <button class="del_button" type="submit" name="del_element">Delete</button>
+      </form>
+    </div>
+  <?php 
+    }
+  } else {
+  ?>
+    <div class="panier_empty">
+      <p>Vous n'avez pas ajouté d'éléments au panier</p>
+    </div>
+  <?php
+  }
+  ?>
+<div id="total">
+  Total: <?php echo $total ?> €<br>
+  <p class="error_solde">
+    <?php
+    if($error_solde != ""){
+      echo $error_solde;
+    }
+    ?>
+  </p>
+  <div class="card-confirm">
+  <form action="#" method="post" >
+    <button class="del_button" type="submit" name="delete">Clear</button>
+    <button class="pay_button" type="submit" name="confirm">Confirm</button>
+  </form>
+  </div>
+</div>
+
 </html>
