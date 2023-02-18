@@ -1,25 +1,26 @@
 .address {
-    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
     padding: 16px 32px;
+    margin-top: 80%;
+    width: 625%;
 }
 
 .city {
-    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
     padding: 16px 32px;
+    width: 625%;
 }
 
 .postal {
-    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
     padding: 16px 32px;
+    width: 625%;
 }
 
 .validate_cart {
@@ -32,10 +33,73 @@
     display: inline-block;
     font-size: 16px;
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
+    margin-top: 30%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     cursor: pointer;
     border-radius: 5px;
 }
+
+/* Partie navbar */
+.header {
+    background-color: white;
+    color: #fff;
+    box-shadow: 0px 3px 0px -2px black;
+    padding: 15px 0;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0 30px;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    padding: 0 20px;
+    transition: background-color 0.2s ease-in-out;
+}
+nav ul li a:hover {
+    text-decoration: underline;
+    text-decoration-color: green;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 5px;
+}
+form {
+    display: inline-block;
+}
+input[type="submit"] {
+    width: 120px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: background-color 0.2s ease-in-out;
+}
+input[type="submit"]:hover {
+    background-color: #006400;
+}
+
