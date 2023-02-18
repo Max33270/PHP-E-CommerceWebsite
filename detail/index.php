@@ -1,5 +1,5 @@
 <?php
-require_once './connect_bd.php';
+require_once '../connect_bd.php';
 session_start();
 
 $BD = connect_BD();
@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
   $card = $card_data->fetch();
 } else {
   // Redirect to the cart page if the ID is not set
-  header('Location: cart_page.php');
+  header('Location: ../cart');
   exit;
 }
 ?>
@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
       <p><?= $card['Pseudo']?></p>
       <p><?= $card['Description']?></p>
       <p><?= $card['Price']. "€"?></p>
-      <form action="cart_page.php" method="get">
+      <form action="../cart" method="get">
         <input type="hidden" name="id" value="<?= $card['Article_id']; ?>">
         <button type="submit">Ajouter au panier</button>
       </form>

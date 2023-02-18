@@ -1,3 +1,4 @@
+/* Partie navbar */
 .header {
     background-color: white;
     color: #fff;
@@ -57,12 +58,15 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #006400;
 }
+
+/* Partie barre de recherche */
 h1 {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 50px;
 }
 
+/* carte */
 .card {
     float: left;
     width: calc(33.33% - 20px);
@@ -84,4 +88,37 @@ h1 {
     font-weight: bold;
     font-size: 20px;
     margin-left: 10px;
+}
+
+/* partie info user */
+h2 {
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 70px;
+    margin-left: 10px;
+    height: 70px;
+    width: 60%;
+    box-shadow: 0px 1px gray;
+}
+
+/* partie user article */
+.article-cards {
+    margin-top: 200px;
+}
+
+.article-cards .card {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+}
+
+.article-cards .title {
+    font-weight: bold;
+    font-size: 30px;
+    width: 60%;
+    height: 70px;
+    box-shadow: 0px 1px grey;
+}
+
+.article-cards .clearfix {
+    clear: both;
 }

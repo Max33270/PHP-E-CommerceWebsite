@@ -1,5 +1,5 @@
 <?php
-require_once './connect_bd.php';
+require_once '../connect_bd.php';
 session_start();
 
 $BD = connect_BD();
@@ -51,15 +51,9 @@ if(isset($_SESSION['panier']) && count($_SESSION['panier']) > 0) {
 
 $error_solde = "";
 if(isset($_POST['confirm']) && $total > 0 && $total <= $_SESSION['solde']) {
-  $_SESSION['solde'] = $_SESSION['solde'] - $total;
-  unset($_SESSION['panier']);
-  $query_solde = "UPDATE user SET Solde = ? WHERE User_id = ?";
-  $solde_update = $BD->prepare($query_solde);
-  $solde_update->bindValue(1, $_SESSION['solde'], PDO::PARAM_INT);
-  $solde_update->bindValue(2, $_SESSION['user_id'], PDO::PARAM_INT);
-  $solde_update->execute();
+  $_SESSION['price_panier'] = $total;
   $total = 0;
-  header('Location: index.php');
+  header('Location: ./validate');
 } else if(isset($_POST['confirm']) && $total > $_SESSION['solde']){
   $error_solde = "Solde manquant";
 }
@@ -73,7 +67,7 @@ if(isset($_POST['confirm']) && $total > 0 && $total <= $_SESSION['solde']) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/cart.css">
+    <link rel="stylesheet" href="../styles/cart.css">
     <title>Cart</title>
 </head>
 
@@ -100,10 +94,10 @@ if(isset($_POST['confirm']) && $total > 0 && $total <= $_SESSION['solde']) {
 <header class="header sticky">
   <nav>
     <ul>
-      <li><a href="index.php">Home</a></li>
-      <li><a href="profile_page.php">Profile</a></li>
-      <li><a href="cart_page.php">Cart</a></li>
-      <li><a href="sell_page.php">Sell</a></li>
+      <li><a href="../index.php">Home</a></li>
+      <li><a href="../account">Profile</a></li>
+      <li><a href="../cart">Cart</a></li>
+      <li><a href="../sell">Sell</a></li>
     </ul>
   </nav>
 </header>

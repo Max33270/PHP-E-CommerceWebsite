@@ -12,7 +12,7 @@ $cart = $cart_data->fetchAll();
 // Check si le bouton logout est pressé
 if (isset($_POST['logout'])) {
   session_destroy();
-  header('Location: login_page.php');
+  header('Location: ./login');
   exit;
 }
 
@@ -49,9 +49,9 @@ if (isset($_POST['logout'])) {
       <nav>
         <ul>
           <li><a href="index.php">Home</a></li>
-          <li><a href="profile_page.php">Profile</a></li>
-          <li><a href="cart_page.php">Cart</a></li>
-          <li><a href="sell_page.php">Sell</a></li>
+          <li><a href="./account">Profile</a></li>
+          <li><a href="./cart">Cart</a></li>
+          <li><a href="./sell">Sell</a></li>
           <li>
           <form action="#" method="post">
             <input type="submit" name="logout" value="Logout">
@@ -68,12 +68,12 @@ if (isset($_POST['logout'])) {
     for($i = 0; $i < count($cart); $i++) { 
     ?>
       <div class="card">
-        <a href="details_page.php?id=<?=$cart[$i]['Article_id']?>">
+      <a href="./detail/?id=<?=$cart[$i]['Article_id']?>">
           <h2><?=$cart[$i]['Name']?></h2>
           <p><?=$cart[$i]['Description']?></p>
           <p><?=$cart[$i]['Price']. "€"?></p>
         </a>
-        <a href="profile_page.php?id=<?=$cart[$i]['User_id']?>">
+        <a href="./account?id=<?=$cart[$i]['User_id']?>">
           <p><?=$cart[$i]['Pseudo']?></p>
         </a>
       </div>

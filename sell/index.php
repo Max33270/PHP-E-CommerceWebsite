@@ -1,5 +1,5 @@
 <?php
-require_once './connect_bd.php';
+require_once '../connect_bd.php';
 session_start();
 $BD = connect_BD();
 
@@ -22,7 +22,7 @@ if(isset($_POST['Name']) && isset($_POST['Description']) && isset($_POST['Price'
     $query_add_article = "INSERT INTO article (Name, Description, Price, Publication_date, User_id) VALUES (:name, :description, :price, :date, :user_id)";
     $creation_article = $BD->prepare($query_add_article);
     $creation_article->execute($data_article);
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 
 ?>
@@ -34,7 +34,7 @@ if(isset($_POST['Name']) && isset($_POST['Description']) && isset($_POST['Price'
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Sell</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="styles/sell.css">
+    <link rel="stylesheet" href="../styles/sell.css">
 
 </head>
 
@@ -118,10 +118,10 @@ h1 {
     <header>
       <nav>
         <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="cart_page.php">Cart</a></li>
-          <li><a href="profile_page.php">Profile</a></li>
-          <li><a href="sell_page.php">Sell</a></li>
+          <li><a href="../index.php">Home</a></li>
+          <li><a href="../cart">Cart</a></li>
+          <li><a href="../account">Profile</a></li>
+          <li><a href="../sell">Sell</a></li>
         </ul>
       </nav>
     </header>

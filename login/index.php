@@ -1,10 +1,10 @@
 <?php
-require_once './connect_bd.php';
+require_once '../connect_bd.php';
 session_start();
 
 // Check if the user is already logged in
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-  header('Location: index.php');
+  header('Location: ../index.php');
   exit;
 }
 
@@ -35,7 +35,7 @@ if (isset($_POST['Pseudo']) && isset($_POST['Password'])) {
     $_SESSION['solde'] = $valid_user['Solde'];
     $_SESSION['profil_picture'] = $valid_user['Profil_picture'];
     $_SESSION['role'] = $valid_user['Role'];
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit;
   } else {
     $error = "Pseudo ou mot de passe incorrect";
@@ -48,7 +48,7 @@ if (isset($_POST['Pseudo']) && isset($_POST['Password'])) {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="../styles/login.css">
   </head>
 <body>
   <div class="grid">
@@ -66,7 +66,7 @@ if (isset($_POST['Pseudo']) && isset($_POST['Password'])) {
         </div>
         <input type="submit" value="Login">
       </form>
-      <a href="signUp_page.php" >Sign up</a>
+      <a href="../register" >Sign up</a>
       <div><?php if ($error != "") {
         echo $error;
       } ?>

@@ -1,5 +1,5 @@
 <?php
-require_once './connect_bd.php';
+require_once '../connect_bd.php';
 session_start();
 
 $error = "";
@@ -54,7 +54,7 @@ if(isset($_POST['Pseudo']) && isset($_POST['Mail']) && isset($_POST['Password'])
     $_SESSION['solde'] = $user['Solde'];
     $_SESSION['profil_picture'] = $user['Profil_picture'];
     $_SESSION['role'] = $user['Role'];
-    header("Location: index.php");
+    header("Location: ../index.php");
   } else {
     $error = "Utilisateur déjà existant";
   }
@@ -67,7 +67,7 @@ if(isset($_POST['Pseudo']) && isset($_POST['Mail']) && isset($_POST['Password'])
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/sign_up.css">
+    <link rel="stylesheet" href="../styles/sign_up.css">
   </head>
   <body>
     <div class="grid">
