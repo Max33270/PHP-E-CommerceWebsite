@@ -55,6 +55,21 @@ if($user_found == null) {
   $user_log_invoice->execute([$_SESSION['user_id']]);
   $invoice = $user_log_invoice->fetchAll();
 }
+
+$edit_solde = false;
+if(isset($_POST['edit-solde'])) {
+  $edit_solde = true;
+}
+
+if (isset($_POST['modifier-solde'])) {
+  $nouveauSolde = $_POST['nouveau-solde'];
+  $_SESSION['solde'] = $nouveauSolde;
+  $solde_query = "UPDATE user SET Solde = $nouveauSolde WHERE User_id = ?";
+  $solde_update = $BD->prepare($solde_query);
+  $solde_update->execute([$_SESSION['user_id']]);
+  $edit_solde = false;
+  // Faire quelque chose avec le nouveau solde...
+}
 ?>
 
 <!DOCTYPE html>
@@ -118,14 +133,26 @@ if($user_found == null) {
     <p><?php echo $user_found;?></p>
   </div>
   
-  <div class="card">
-    <p class="title"><b>Solde: </b> <?=$_SESSION['solde'] . "€"?></p>
-  </div>
-  
-  <div class="card">
-    <p class="title">Edit profil</p>
-    <p>Ajout et modification des informations du profil</p>
-  </div>
+  <form action="#" method="post">
+    <?php if($edit_solde == false) { ?>
+      <button type="submit" name="edit-solde" class="edit-card">
+        <p class="title"><b>Solde: </b> <?=$_SESSION['solde'] . "€"?></p>
+      </button>
+    <?php } else { ?>
+      <a href="../account" class="edit-card">
+        <input type="text" name="nouveau-solde" placeholder="Entrez le nouveau solde">
+        <br>
+        <button type="submit" name="modifier-solde" class="confirm-solde">Valider</button>
+      </a>
+    <?php } ?>
+  <form>
+
+  <form action="#" method="post">
+    <button type="submit" name="edit" class="edit-card">
+      <p class="title">Edit profil</p>
+      <p>Ajout et modification des informations du profil</p>
+    </button>
+  </form>
   <div class="article-cards">
     <p class="title">Vos articles :</p>
     <?php 
@@ -151,7 +178,7 @@ if($user_found == null) {
       for($j = 0; $j < count($invoice); $j++){
       ?>
         <div class="card">
-          <p><?=$invoice[$j]['Transaction_date'] . "      /      " . $invoice[$j]['Billing_address'] . " " . $invoice[$j]['Billing_city'] . " " . $invoice[$j]['Billing_postal'] . "      /      " . $invoice[$j]['Amount']. "€"?></p>
+          <p><?=$invoice[$j]['Transaction_date'] . " / " . $invoice[$j]['Billing_address'] . " " . $invoice[$j]['Billing_city'] . " " . $invoice[$j]['Billing_postal'] . " / " . $invoice[$j]['Amount']. "€"?></p>
         </div>
       <?php
       }
