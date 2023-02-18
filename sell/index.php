@@ -115,16 +115,16 @@ h1 {
 </style>
 
 <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="../index.php">Home</a></li>
-          <li><a href="../cart">Cart</a></li>
-          <li><a href="../account">Profile</a></li>
-          <li><a href="../sell">Sell</a></li>
-        </ul>
-      </nav>
-    </header>
+<header class="header sticky">
+  <nav>
+    <ul>
+      <li><a href="../index.php">Home</a></li>
+      <li><a href="../account">Profile</a></li>
+      <li><a href="../cart">Cart</a></li>
+      <li><a href="../sell">Sell</a></li>
+    </ul>
+  </nav>
+</header>
 
     <form action="" method="post" enctype="multipart/form-data">
         <div>
