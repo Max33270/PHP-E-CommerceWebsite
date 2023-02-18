@@ -69,8 +69,19 @@ if(isset($_POST['Pseudo']) && isset($_POST['Mail']) && isset($_POST['Password'])
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../styles/sign_up.css">
   </head>
+<header class="header sticky">
+  <nav>
+    <ul>
+      <li><a href="../index.php">Home</a></li>
+      <li><a href="../account">Profile</a></li>
+      <li><a href="../cart">Cart</a></li>
+      <li><a href="../sell">Sell</a></li>
+    </ul>
+  </nav>
+</header>
   <body>
     <div class="grid">
+    <div class="register_card">
       <header class="login__header">
         <h3 class="login__title">Sign up</h3>
       </header>
@@ -86,11 +97,13 @@ if(isset($_POST['Pseudo']) && isset($_POST['Mail']) && isset($_POST['Password'])
             <input id="password" type="password" placeholder="Password" name="Password" required>
           </div>
         </div>
-          <input type="submit" value="Sign up">
+          <input type="submit" value="Sign up" class="register_button">
       </form>
+      <a href="../login" class="loginacc">Log in</a>
         <div><?php if ($error != "") {
           echo $error;} ?>
         </div>
       </div>
+    </div>
   </body>
 </html>
