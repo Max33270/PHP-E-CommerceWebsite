@@ -51,7 +51,18 @@ if (isset($_POST['Pseudo']) && isset($_POST['Password'])) {
     <link rel="stylesheet" href="../styles/login.css">
   </head>
 <body>
+<header class="header sticky">
+  <nav>
+    <ul>
+      <li><a href="../index.php">Home</a></li>
+      <li><a href="../account">Profile</a></li>
+      <li><a href="../cart">Cart</a></li>
+      <li><a href="../sell">Sell</a></li>
+    </ul>
+  </nav>
+</header>
   <div class="grid">
+  <div class="login_card">
     <header class="login__header">
       <h3 class="login__title">Login</h3>
       </header>
@@ -70,7 +81,8 @@ if (isset($_POST['Pseudo']) && isset($_POST['Password'])) {
       <div><?php if ($error != "") {
         echo $error;
       } ?>
-      </div>
     </div>
+    </div>
+  </div>
   </body>
 </html>
