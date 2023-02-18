@@ -1,10 +1,53 @@
-body {
-    background-color: white; 
-    font-family: Arial, sans-serif; 
-    text-align: center;
-    color: black;
+/* NavBar */
+.header {
+    background-color: white;
+    color: #fff;
+    box-shadow: 0px 3px 0px -2px black;
+    padding: 15px 0;
+    margin-left: 16px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0 30px;
+}
+nav ul {
+    display: flex;
+    list-style: none;
     margin: 0;
     padding: 0;
+}
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    padding: 0 20px;
+    transition: background-color 0.2s ease-in-out;
+}
+nav ul li a:hover {
+    text-decoration: underline;
+    text-decoration-color: green;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 5px;
+}
+form {
+    display: inline-block;
+}
+
+body {
+    background-color: white; 
+    text-align: center;
+    color: black;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -76,47 +119,3 @@ a.registeracc{
    margin-left: -4%;
 }
 
-*/ NavBar */
-.header {
-    background-color: white;
-    color: #fff;
-    box-shadow: 0px 3px 0px -2px black;
-    padding: 15px 0;
-}
-
-.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-    padding: 0 30px;
-}
-nav ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-nav ul li a {
-    color: black;
-    text-decoration: none;
-    padding: 0 20px;
-    transition: background-color 0.2s ease-in-out;
-}
-nav ul li a:hover {
-    text-decoration: underline;
-    text-decoration-color: green;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 5px;
-}
-form {
-    display: inline-block;
-}
