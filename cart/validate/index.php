@@ -55,9 +55,6 @@ if(isset($_POST['address']) && isset($_POST['city']) && isset($_POST['postal']))
     </nav>
 </header>
 
-<form action="#" method="post">
-  <input type="submit" name="logout" value="Logout">
-</form>
 <body>
     <form action="#" method="post">
         <div><input type="text" placeholder="Address.." class="address" required></input></div>
