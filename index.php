@@ -9,6 +9,8 @@ $cart_data = $BD->prepare($cart_query);
 $cart_data->execute();
 $cart = $cart_data->fetchAll();
 
+// récupération des articles quand connecté
+
 // Check si le bouton logout est pressé
 if (isset($_POST['logout'])) {
   session_destroy();
@@ -44,7 +46,18 @@ if (isset($_POST['logout'])) {
     window.onscroll = function() {stickyNavbar()};
   </script>
 
-  
+    <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) { ?>
+      <header class="header sticky">
+      <nav>
+        <ul>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="./login">Profile</a></li>
+          <li><a href="./login">Cart</a></li>
+          <li><a href="./login">Sell</a></li>
+        </ul>
+      </nav>
+    </header>
+  <?php } else { ?>
     <header class="header sticky">
       <nav>
         <ul>
@@ -60,20 +73,20 @@ if (isset($_POST['logout'])) {
         </ul>
       </nav>
     </header>
+  <?php }?>
 
     <body>
-    <h1>Welcome to your home page</h1>
+    <h1>Accueil</h1>
 
     <?php 
-    for($i = 0; $i < count($cart); $i++) { 
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) { 
+      for($i = 0; $i < count($cart); $i++) { 
     ?>
       <div class="card">
-      <a href="./detail/?id=<?=$cart[$i]['Article_id']?>">
+      <a href="./login/" ?>
           <h2><?=$cart[$i]['Name']?></h2>
           <p><?=$cart[$i]['Description']?></p>
           <p><?=$cart[$i]['Price']. "€"?></p>
-        </a>
-        <a href="./account?id=<?=$cart[$i]['User_id']?>">
           <p><?=$cart[$i]['Pseudo']?></p>
         </a>
       </div>
@@ -83,7 +96,28 @@ if (isset($_POST['logout'])) {
         <div class="clearfix"></div>
         <?php
       }
-    }; 
+    }
+  } else {
+    for($i = 0; $i < count($cart); $i++) {
+  ?>
+    <div class="card">
+      <a href="./detail/?id=<?=$cart[$i]['Article_id']?>">
+        <h2><?=$cart[$i]['Name']?></h2>
+        <p><?=$cart[$i]['Description']?></p>
+        <p><?=$cart[$i]['Price']. "€"?></p>
+      </a>
+      <a href="./account?id=<?=$cart[$i]['User_id']?>">
+        <p><?=$cart[$i]['Pseudo']?></p>
+      </a>
+    </div>
+    <?php
+      if (($i + 1) % 3 == 0) {
+        ?>
+        <div class="clearfix"></div>
+  <?php 
+      }
+    }
+  } 
   ?>
   </body>
 </html>

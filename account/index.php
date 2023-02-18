@@ -139,11 +139,11 @@ if (isset($_POST['modifier-solde'])) {
         <p class="title"><b>Solde: </b> <?=$_SESSION['solde'] . "€"?></p>
       </button>
     <?php } else { ?>
-      <a href="../account" class="edit-card">
+      <div class="edit-card">
         <input type="text" name="nouveau-solde" placeholder="Entrez le nouveau solde">
         <br>
         <button type="submit" name="modifier-solde" class="confirm-solde">Valider</button>
-      </a>
+    </div>
     <?php } ?>
   <form>
 
