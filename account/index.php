@@ -49,6 +49,11 @@ if($user_found == null) {
   $user_log_article = $BD->prepare($user_log_query);
   $user_log_article->execute([$_SESSION['user_id']]);
   $article = $user_log_article->fetchAll();
+
+  $user_log_invoice_query = "SELECT * FROM invoice WHERE User_id = ?";
+  $user_log_invoice = $BD->prepare($user_log_invoice_query);
+  $user_log_invoice->execute([$_SESSION['user_id']]);
+  $invoice = $user_log_invoice->fetchAll();
 }
 ?>
 
@@ -86,8 +91,8 @@ if($user_found == null) {
     <ul>
       <li><a href="../index.php">Home</a></li>
       <li><a href="../account/">Profile</a></li>
-      <li><a href="./cart/">Cart</a></li>
-      <li><a href="./sell/">Sell</a></li>
+      <li><a href="../cart/">Cart</a></li>
+      <li><a href="../sell/">Sell</a></li>
     </ul>
   </nav>
 </header>
@@ -139,6 +144,20 @@ if($user_found == null) {
         }
       }; 
     ?>
+  </div>
+  <div class="article-cards">
+      <p class="title">Vos factures :</p>
+      <?php
+      for($j = 0; $j < count($invoice); $j++){
+      ?>
+        <div class="card">
+          <p><?=$invoice[$j]['Transaction_date']?></p>
+          <p><?=$invoice[$j]['Amount']. "€"?></p>
+          <p><?=$invoice[$j]['Billing_address'] . " " . $invoice[$j]['Billing_city'] . " " . $invoice[$j]['Billing_postal']?></p>
+        </div>
+      <?php
+      }
+      ?>
   </div>
   <?php
   } else if($user_found == "user by article") {
