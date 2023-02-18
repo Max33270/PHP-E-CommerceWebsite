@@ -41,14 +41,15 @@ if(isset($_POST['address']) && isset($_POST['city']) && isset($_POST['postal']))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles/cart_validate.css">
     <title>Validate</title>
 </head>
 <body>
     <form action="#" method="post">
-        <div><input type="text" placeholder="Address.." name="address" required></input></div>
-        <div><input type="text" placeholder="City.." name="city" required></input></div>
-        <div><input type="text" placeholder="Code postal.." name="postal" required></input></div>
-        <div><input type="submit" value="Confirm"></div>
+        <div><input type="text" placeholder="Address.." class="address" required></input></div>
+        <div><input type="text" placeholder="City.." class="city" required></input></div>
+        <div><input type="text" placeholder="Code postal.." class="postal" required></input></div>
+        <div><input type="submit" value="Confirm" class="validate_cart"></div>
     </form>
     
 </body>
