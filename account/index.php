@@ -145,15 +145,13 @@ if($user_found == null) {
       }; 
     ?>
   </div>
-  <div class="article-cards">
+  <div class="invoice-cards">
       <p class="title">Vos factures :</p>
       <?php
       for($j = 0; $j < count($invoice); $j++){
       ?>
         <div class="card">
-          <p><?=$invoice[$j]['Transaction_date']?></p>
-          <p><?=$invoice[$j]['Amount']. "€"?></p>
-          <p><?=$invoice[$j]['Billing_address'] . " " . $invoice[$j]['Billing_city'] . " " . $invoice[$j]['Billing_postal']?></p>
+          <p><?=$invoice[$j]['Transaction_date'] . "      /      " . $invoice[$j]['Billing_address'] . " " . $invoice[$j]['Billing_city'] . " " . $invoice[$j]['Billing_postal'] . "      /      " . $invoice[$j]['Amount']. "€"?></p>
         </div>
       <?php
       }

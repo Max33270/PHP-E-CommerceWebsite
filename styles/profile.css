@@ -127,3 +127,27 @@ h2 {
 .article-cards .clearfix {
     clear: both;
 }
+
+/* Partie user invoice */
+.invoice-cards {
+    margin-top: 200px;
+}
+
+.invoice-cards .card {
+    width: calc(45% - 20px);
+    margin-bottom: 20px;
+    height: 70px;
+    clear: both;
+}
+
+.invoice-cards .card p {
+    margin-left: 40px;
+}
+
+.invoice-cards .title {
+    font-weight: bold;
+    font-size: 30px;
+    width: 60%;
+    height: 70px;
+    box-shadow: 0px 1px grey;
+}
