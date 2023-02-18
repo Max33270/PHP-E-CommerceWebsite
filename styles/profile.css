@@ -109,6 +109,11 @@ h2 {
 .article-cards .card {
     width: calc(33.33% - 20px);
     margin-bottom: 20px;
+    height: 130px;
+}
+
+.article-cards .card p {
+    text-align: center;
 }
 
 .article-cards .title {
