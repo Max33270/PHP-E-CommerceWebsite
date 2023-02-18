@@ -94,7 +94,7 @@ input[type="submit"] {
 }
 
 .register_button{
-    margin-left: 3.5%;
+    margin-left: -4%;
 }
 
 .register_card {
@@ -117,4 +117,17 @@ a{
 a.loginacc{
     margin-top: 20%;
     margin-left: 45%;
+}
+
+input[type="submit"] {
+    width: 60px;
+    height: 40px;
+    width: 120px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
 }
