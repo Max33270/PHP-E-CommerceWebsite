@@ -64,9 +64,9 @@ if (isset($_POST['Pseudo']) && isset($_POST['Password'])) {
             <input id="password" type="password" placeholder="Password" name="Password" required>
           </div>
         </div>
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" class="login_button">
       </form>
-      <a href="../register" >Sign up</a>
+      <a href="../register" class="registeracc">Sign up</a>
       <div><?php if ($error != "") {
         echo $error;
       } ?>

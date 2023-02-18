@@ -30,3 +30,7 @@ input[type="submit"] {
     width: 120px;
     height: 40px;
 }
+
+a{
+  color: white; 
+}
