@@ -44,6 +44,17 @@ if(isset($_POST['address']) && isset($_POST['city']) && isset($_POST['postal']))
     <link rel="stylesheet" href="../../styles/cart_validate.css">
     <title>Validate</title>
 </head>
+<header>
+    <nav>
+        <ul>
+          <li><a href="../../index.php">Home</a></li>
+          <li><a href="../../cart">Cart</a></li>
+          <li><a href="../../account">Profile</a></li>
+          <li><a href="../../sell">Sell</a></li>
+        </ul>
+    </nav>
+</header>
+
 <body>
     <form action="#" method="post">
         <div><input type="text" placeholder="Address.." class="address" required></input></div>
@@ -51,6 +62,11 @@ if(isset($_POST['address']) && isset($_POST['city']) && isset($_POST['postal']))
         <div><input type="text" placeholder="Code postal.." class="postal" required></input></div>
         <div><input type="submit" value="Confirm" class="validate_cart"></div>
     </form>
-    
 </body>
 </html>
+
+
+
+
+
+  
