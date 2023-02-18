@@ -44,12 +44,12 @@ if(isset($_POST['address']) && isset($_POST['city']) && isset($_POST['postal']))
     <link rel="stylesheet" href="../../styles/cart_validate.css">
     <title>Validate</title>
 </head>
-<header>
+<header class="header sticky">
     <nav>
         <ul>
           <li><a href="../../index.php">Home</a></li>
-          <li><a href="../../cart">Cart</a></li>
           <li><a href="../../account">Profile</a></li>
+          <li><a href="../../cart">Cart</a></li>
           <li><a href="../../sell">Sell</a></li>
         </ul>
     </nav>
