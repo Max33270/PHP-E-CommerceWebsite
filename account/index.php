@@ -166,10 +166,10 @@ if(isset($_POST['edit-info'])) {
       for($i = 0; $i < count($article); $i++) { 
     ?>
       <div class="card">
-        <p><?=$article[$i]['Name']?></p>
         <?php if($article[$i]['Picture_link'] != "") {?>
         <img src="<?php echo $article[$i]['Picture_link'];?>" alt="photo article">
         <?php } ?>
+        <p><?=$article[$i]['Name']?></p>
         <p><?=$article[$i]['Description']?></p>
         <p><?=$article[$i]['Price']. "€"?></p>
       </div>
