@@ -24,6 +24,7 @@ if (isset($_POST['logout'])) {
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="styles/style.css">
+    <title>Home</title>
   </head>
 
   <script>

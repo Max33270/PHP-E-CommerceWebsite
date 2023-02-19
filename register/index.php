@@ -69,6 +69,7 @@ if(isset($_POST['Pseudo']) && isset($_POST['Mail']) && isset($_POST['Password'])
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../styles/sign_up.css">
+    <title>Sign up</title>
   </head>
 <header class="header sticky">
   <nav>

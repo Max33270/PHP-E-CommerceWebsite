@@ -53,16 +53,12 @@ if(isset($_POST['confirm-modif-user'])) {
   if($new_pseudo != "") {
     $query_modif = "UPDATE user SET Pseudo = ? WHERE User_id = ?";
     $modif = $BD->prepare($query_modif);
-    $modif->bindValue(1, $new_pseudo, PDO::PARAM_STR);
-    $modif->bindValue(2, $user_id, PDO::PARAM_INT);
-    $modif->execute();
+    $modif->execute([$new_pseudo, $user_id]);
   }
   if($new_role != "") {
-  $query_modif = "UPDATE user SET Role = ? WHERE User_id = ?";
-  $modif = $BD->prepare($query_modif);
-  $modif->bindValue(1, $new_role, PDO::PARAM_STR);
-  $modif->bindValue(2, $user_id, PDO::PARAM_INT);
-  $modif->execute();
+    $query_modif = "UPDATE user SET Role = ? WHERE User_id = ?";
+    $modif = $BD->prepare($query_modif);
+    $modif->execute([$new_role, $user_id]);
   }
   header('Location: ../admin');
 }
