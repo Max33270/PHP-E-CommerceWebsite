@@ -83,6 +83,11 @@ h1 {
     margin-left: 10px;
 }
 
+.card img {
+    width: 130px;
+    height: 130px;
+}
+
 .title {
     text-align:start;
     font-weight: bold;

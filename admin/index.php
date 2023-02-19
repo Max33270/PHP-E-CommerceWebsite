@@ -2,6 +2,18 @@
 require_once '../connect_bd.php';
 session_start();
 
+// Récupération de tous les articles
+$BD = connect_BD();
+$user_list_query = "SELECT * FROM user";
+$user_list = $BD->prepare($user_list_query);
+$user_list->execute();
+$user = $user_list->fetchAll();
+
+$cart_query = "SELECT * FROM article JOIN user ON article.User_id = user.User_id ORDER BY Publication_date DESC;";
+$cart_data = $BD->prepare($cart_query);
+$cart_data->execute();
+$cart = $cart_data->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +61,7 @@ session_start();
 </header>
 
 <body>
+  
     
 </body>
 </html>

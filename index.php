@@ -54,6 +54,8 @@ if (isset($_POST['logout'])) {
           <li><a href="./login">Profile</a></li>
           <li><a href="./login">Cart</a></li>
           <li><a href="./login">Sell</a></li>
+          <li><a href="./login" >Login</a></li>
+          <li><a href="./register">Sign up</a></li>
         </ul>
       </nav>
     </header>
@@ -106,10 +108,14 @@ if (isset($_POST['logout'])) {
     }
   } else {
     for($i = 0; $i < count($cart); $i++) {
+      $img = substr($cart[$i]['Picture_link'], 1);
   ?>
     <div class="card">
       <a href="./detail/?id=<?=$cart[$i]['Article_id']?>">
         <h2><?=$cart[$i]['Name']?></h2>
+        <?php if($cart[$i]['Picture_link'] != "") {?>
+        <img src="<?= $img?>" alt="photo article">
+        <?php } ?>
         <p><?=$cart[$i]['Description']?></p>
         <p><?=$cart[$i]['Price']. "€"?></p>
       </a>
