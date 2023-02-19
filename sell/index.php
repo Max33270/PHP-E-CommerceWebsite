@@ -61,7 +61,7 @@ if(isset($_POST['Name']) && isset($_POST['Description']) && isset($_POST['Price'
 </header>
     
     <form action="#" method="post" enctype="multipart/form-data">
-        Select image to upload:
+        <div id="upload_text">Select image to upload:</div> <br>
         <input type="file" name="fileToUpload" id="fileToUpload"> 
         <br> <br> <br>
         <div><input type="text" placeholder="Name" name="Name" id="name" required></input></div> <br> <br>
