@@ -57,3 +57,48 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #006400;
 }
+
+.options {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.options button {
+    cursor: pointer;
+}
+
+.card {
+    float: left;
+    width: calc(33.33% - 20px);
+    margin: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 5px gray;
+    text-align: left;
+}
+
+.card-article {
+    display: flex;
+    align-items: center;
+    width: calc(33.33% - 20px);
+    margin: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 5px gray;
+    
+}
+
+.card-article img {
+    text-align: left;
+    width: 70px;
+    height: 70px;
+    margin-right: 10px; /* pour ajouter un peu d'espace entre l'image et le texte */
+}
+
+.card-article p {
+    text-align: left;
+    margin: 0; /* pour enlever le margin par défaut du paragraphe */
+}
+
+.card button {
+    text-align: right;
+
+}

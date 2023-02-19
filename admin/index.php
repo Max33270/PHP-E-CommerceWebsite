@@ -1,18 +1,51 @@
 <?php
 require_once '../connect_bd.php';
 session_start();
-
-// Récupération de tous les articles
 $BD = connect_BD();
+
+// Récupération de tous les users
+$show_user = true;
 $user_list_query = "SELECT * FROM user";
 $user_list = $BD->prepare($user_list_query);
 $user_list->execute();
 $user = $user_list->fetchAll();
 
-$cart_query = "SELECT * FROM article JOIN user ON article.User_id = user.User_id ORDER BY Publication_date DESC;";
-$cart_data = $BD->prepare($cart_query);
-$cart_data->execute();
-$cart = $cart_data->fetchAll();
+// Récupération de tous les users
+if(isset($_POST['show-articles'])){
+  $show_user = false;
+  $cart_query = "SELECT * FROM article JOIN user ON article.User_id = user.User_id ORDER BY Publication_date DESC;";
+  $cart_data = $BD->prepare($cart_query);
+  $cart_data->execute();
+  $cart = $cart_data->fetchAll();
+}
+
+if(isset($_POST['show-users'])){
+  $show_user = true;
+}
+
+if(isset($_POST['delete-user'])){
+  $user_id = $_POST['delete-user'];
+  $user_delete_query = "DELETE FROM user WHERE User_id = $user_id";
+  $user_delete = $BD->prepare($user_delete_query);
+  $user_delete->execute();
+
+  $user_delete_article_query = "DELETE FROM article WHERE User_id = $user_id";
+  $user_delete_article = $BD->prepare($user_delete_article_query);
+  $user_delete_article->execute();
+
+  $user_delete_invoice_query = "DELETE FROM invoice WHERE User_id = $user_id";
+  $user_delete_invoice = $BD->prepare($user_delete_invoice_query);
+  $user_delete_invoice->execute();
+  header('Location: ../admin');
+}
+
+if(isset($_POST['delete-article'])){
+  $article_id = $_POST['delete-article'];
+  $delete_article_query = "DELETE FROM article WHERE Article_id = $article_id";
+  $delete_article = $BD->prepare($delete_article_query);
+  $delete_article->execute();
+  header('Location: ../admin');
+}
 
 ?>
 
@@ -61,7 +94,44 @@ $cart = $cart_data->fetchAll();
 </header>
 
 <body>
-  
-    
+  <div class="options">
+    <form action="#" method="post">
+      <button type="submit" name="show-users">Users</button>
+      <button type="submit" name="show-articles">Articles</button>
+    </form>
+  </div>
+  <?php 
+  if($show_user == true) {
+    for($i = 0; $i < count($user); $i++) {
+      $img_user = $user[$i]['Profil_picture'];
+  ?>
+    <div class="card">
+      <?php if($user[$i]['Profil_picture'] != "") {?>
+      <img src="<?= $img_user?>" alt="photo article">
+      <?php } ?>
+      <p><?= $user[$i]['Role'] . " / " . $user[$i]['Pseudo'] . " / " . $user[$i]['Mail'] ?></p>
+      <form action="#" method="post">
+        <button type="submit" name="modif-user" value="<?= $user[$i]['User_id'] ?>">Modifier</button>
+        <button type="submit" name="delete-user" value="<?= $user[$i]['User_id'] ?>">Supprimer</button>
+      </form>
+    </div>
+
+  <?php } } else {
+    for($i = 0; $i < count($cart); $i++) {
+      $img_article = $cart[$i]['Picture_link'];
+  ?>  
+    <div class="card-article">
+      <?php if($cart[$i]['Picture_link'] != "") {?>
+      <img src="<?= $img_article?>" alt="photo article">
+      <?php } ?>
+      <p><?= $cart[$i]['Name'] . " " . $cart[$i]['Price'] ?></p>
+      <form action="#" method="post">
+        <button type="submit" name="modif-article" value="<?= $cart[$i]['Article_id'] ?>">Modifier</button>
+        <button type="submit" name="delete-article" value="<?= $cart[$i]['Article_id'] ?>">Supprimer</button>
+      </form>
+    </div>
+  <?php
+  }}
+  ?>
 </body>
 </html>

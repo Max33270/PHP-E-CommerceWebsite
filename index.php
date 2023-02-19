@@ -108,26 +108,28 @@ if (isset($_POST['logout'])) {
     }
   } else {
     for($i = 0; $i < count($cart); $i++) {
-      $img = substr($cart[$i]['Picture_link'], 1);
+      if($_SESSION['pseudo'] != $cart[$i]['Pseudo']) {
+        $img = substr($cart[$i]['Picture_link'], 1);
   ?>
-    <div class="card">
-      <a href="./detail/?id=<?=$cart[$i]['Article_id']?>">
-        <h2><?=$cart[$i]['Name']?></h2>
-        <?php if($cart[$i]['Picture_link'] != "") {?>
-        <img src="<?= $img?>" alt="photo article">
-        <?php } ?>
-        <p><?=$cart[$i]['Description']?></p>
-        <p><?=$cart[$i]['Price']. "€"?></p>
-      </a>
-      <a href="./account?id=<?=$cart[$i]['User_id']?>">
-        <p><?=$cart[$i]['Pseudo']?></p>
-      </a>
-    </div>
-    <?php
-      if (($i + 1) % 3 == 0) {
-        ?>
-        <div class="clearfix"></div>
-  <?php 
+      <div class="card">
+        <a href="./detail/?id=<?=$cart[$i]['Article_id']?>">
+          <h2><?=$cart[$i]['Name']?></h2>
+          <?php if($cart[$i]['Picture_link'] != "") {?>
+          <img src="<?= $img?>" alt="photo article">
+          <?php } ?>
+          <p><?=$cart[$i]['Description']?></p>
+          <p><?=$cart[$i]['Price']. "€"?></p>
+        </a>
+        <a href="./account?id=<?=$cart[$i]['User_id']?>">
+          <p><?=$cart[$i]['Pseudo']?></p>
+        </a>
+      </div>
+      <?php
+        if (($i + 1) % 3 == 0) {
+          ?>
+          <div class="clearfix"></div>
+    <?php 
+        }
       }
     }
   } 
