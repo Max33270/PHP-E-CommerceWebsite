@@ -84,6 +84,10 @@ h1 {
     color: black;
 }
 
+.card {
+    height: 600px;
+}
+
 .card h2 {
     padding: 20px;
     font-size: 24px;
