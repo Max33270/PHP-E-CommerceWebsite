@@ -65,6 +65,9 @@ if (isset($_POST['logout'])) {
           <li><a href="./account">Profile</a></li>
           <li><a href="./cart">Cart</a></li>
           <li><a href="./sell">Sell</a></li>
+          <?php if($_SESSION['role'] == "admin") {?>
+          <li><a href="./admin">Admin</a></li>
+          <?php }?>
           <li>
           <form action="#" method="post">
             <input type="submit" name="logout" value="Logout">
@@ -81,13 +84,17 @@ if (isset($_POST['logout'])) {
     <?php 
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) { 
       for($i = 0; $i < count($cart); $i++) { 
+        $img = substr($cart[$i]['Picture_link'], 1);
     ?>
       <div class="card">
       <a href="./login/" ?>
+          <p><?=$cart[$i]['Pseudo']?></p>
           <h2><?=$cart[$i]['Name']?></h2>
+          <?php if($cart[$i]['Picture_link'] != "") {?>
+          <img src="<?= $img?>" alt="photo article">
+          <?php } ?>
           <p><?=$cart[$i]['Description']?></p>
           <p><?=$cart[$i]['Price']. "€"?></p>
-          <p><?=$cart[$i]['Pseudo']?></p>
         </a>
       </div>
     <?php

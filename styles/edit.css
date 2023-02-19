@@ -1,3 +1,4 @@
+/* Partie navbar */
 .header {
     background-color: white;
     color: #fff;
@@ -32,7 +33,7 @@ nav ul li a {
     padding: 0 20px;
     transition: background-color 0.2s ease-in-out;
 }
-nav ul li a:hover {
+  nav ul li a:hover {
     text-decoration: underline;
     text-decoration-color: green;
     text-decoration-thickness: 3px;
@@ -56,48 +57,4 @@ input[type="submit"] {
 }
 input[type="submit"]:hover {
     background-color: #006400;
-}
-h1 {
-    text-align: center;
-    margin-top: 80px;
-    margin-bottom: 50px;
-    height: 70px;
-    
-}
-
-.card {
-    float: left;
-    width: calc(33.33% - 20px);
-    margin: 10px;
-    background-color: white;
-    box-shadow: 2px 2px 5px gray;
-    text-align: center;
-}
-
-.clearfix {
-    clear: both;
-}
-
-.card a {
-    text-decoration: none;
-    color: black;
-}
-
-.card h2 {
-    padding: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    
-}
-  
-.card p {
-    padding: 20px;
-    font-size: 16px;
-    text-align: center;
-}
-
-.card img {
-    width: 230px;
-    height: 230px;
 }

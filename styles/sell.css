@@ -1,14 +1,17 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-header {
+.header {
     background-color: white;
     color: #fff;
     box-shadow: 0px 3px 0px -2px black;
     padding: 15px 0;
 }
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -30,11 +33,33 @@ nav ul li a {
     transition: background-color 0.2s ease-in-out;
 }
 nav ul li a:hover {
-    background-color: green;
+    text-decoration: underline;
+    text-decoration-color: green;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 5px;
+}
+form {
+    display: inline-block;
+}
+input[type="submit"] {
+    width: 120px;
+    /* background-color: green; */
     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: background-color 0.2s ease-in-out;
+}
+input[type="submit"]:hover {
+    background-color: #006400;
 }
 form {   
     display: inline-block;
+    margin-top: 120px;
 }
 input[type="submit"] {
     width: 120px;
@@ -55,4 +80,9 @@ input[type="submit"]:hover {
 h1 {
   text-align: center;
   margin-top: 100px;
+}
+
+#description input[type="text"]{
+    width: 100%;
+    height: 150px;
 }

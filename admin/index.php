@@ -1,5 +1,7 @@
 <?php
-session_start()
+require_once '../connect_bd.php';
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -8,9 +10,10 @@ session_start()
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/edit.css">
-    <title>Edit</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+    <title>Admin</title>
 </head>
+
 <script>
     // Sélectionnez la navbar
     const navbar = document.querySelector('.header');
@@ -31,16 +34,15 @@ session_start()
     window.onscroll = function() {stickyNavbar()};
   </script>
 
-  
 <header class="header sticky">
   <nav>
     <ul>
-      <li><a href="../../index.php">Home</a></li>
-      <li><a href="../../account/">Profile</a></li>
-      <li><a href="../../cart/">Cart</a></li>
-      <li><a href="../../sell/">Sell</a></li>
+      <li><a href="../index.php">Home</a></li>
+      <li><a href="../account/">Profile</a></li>
+      <li><a href="../cart/">Cart</a></li>
+      <li><a href="../sell/">Sell</a></li>
       <?php if($_SESSION['role'] == "admin") {?>
-      <li><a href="../../admin">Admin</a></li>
+      <li><a href="./admin">Admin</a></li>
       <?php }?>
     </ul>
   </nav>

@@ -51,6 +51,9 @@ if(isset($_POST['address']) && isset($_POST['city']) && isset($_POST['postal']))
           <li><a href="../../account">Profile</a></li>
           <li><a href="../../cart">Cart</a></li>
           <li><a href="../../sell">Sell</a></li>
+          <?php if($_SESSION['role'] == "admin") {?>
+          <li><a href="../../admin">Admin</a></li>
+          <?php }?>
         </ul>
     </nav>
 </header>

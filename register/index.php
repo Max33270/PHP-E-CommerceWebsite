@@ -30,9 +30,10 @@ if(isset($_POST['Pseudo']) && isset($_POST['Mail']) && isset($_POST['Password'])
     $datas_create_user = [
       'create_pseudo' => $pseudo,
       'create_password' => $hashed_password,
-      'create_mail' => $mail
+      'create_mail' => $mail,
+      'role' => "user"
     ];
-    $bd_Query = "INSERT INTO user (Pseudo, Password, Mail) VALUES (:create_pseudo, :create_password, :create_mail)";
+    $bd_Query = "INSERT INTO user (Pseudo, Password, Mail, Role) VALUES (:create_pseudo, :create_password, :create_mail, :role)";
     $recipesStatement = $BD->prepare($bd_Query);
     $recipesStatement->execute($datas_create_user);
 

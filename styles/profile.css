@@ -103,6 +103,8 @@ h1 {
 
 /* partie bouton edit_info */
 .edit-card {
+    text-decoration: none;
+    color: black;
     cursor: pointer;
     float: left;
     width: calc(50% - 20px);

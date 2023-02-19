@@ -70,6 +70,10 @@ if (isset($_POST['modifier-solde'])) {
   $edit_solde = false;
   // Faire quelque chose avec le nouveau solde...
 }
+
+if(isset($_POST['edit-info'])) {
+  header('Location: ./edit');
+}
 ?>
 
 <!DOCTYPE html>
@@ -101,13 +105,16 @@ if (isset($_POST['modifier-solde'])) {
   </script>
 
   
-  <header class="header sticky">
+<header class="header sticky">
   <nav>
     <ul>
       <li><a href="../index.php">Home</a></li>
       <li><a href="../account/">Profile</a></li>
       <li><a href="../cart/">Cart</a></li>
       <li><a href="../sell/">Sell</a></li>
+      <?php if($_SESSION['role'] == "admin") {?>
+      <li><a href="../admin">Admin</a></li>
+      <?php }?>
     </ul>
   </nav>
 </header>
@@ -148,7 +155,7 @@ if (isset($_POST['modifier-solde'])) {
   <form>
 
   <form action="#" method="post">
-    <button type="submit" name="edit" class="edit-card">
+    <button type="submit" name="edit-info" class="edit-card">
       <p class="title">Edit profil</p>
       <p>Ajout et modification des informations du profil</p>
     </button>
@@ -160,6 +167,9 @@ if (isset($_POST['modifier-solde'])) {
     ?>
       <div class="card">
         <p><?=$article[$i]['Name']?></p>
+        <?php if($article[$i]['Picture_link'] != "") {?>
+        <img src="<?php echo $article[$i]['Picture_link'];?>" alt="photo article">
+        <?php } ?>
         <p><?=$article[$i]['Description']?></p>
         <p><?=$article[$i]['Price']. "€"?></p>
       </div>
@@ -198,6 +208,9 @@ if (isset($_POST['modifier-solde'])) {
     <p><?php echo $user_by_article['Pseudo']; ?></p>
     <p><?php echo $user_by_article['Mail'] ?></p>
   </div>
+  <br>
+  <br>
+  <br>
   <div class="article-cards">
   <p class="title">Ses articles :</p>
   <?php 
@@ -219,6 +232,7 @@ if (isset($_POST['modifier-solde'])) {
   </div>
   <?php
    } else {
+    if($user_found['User_id'] != $_SESSION['user_id']) {
   ?>
   <h1>
     <form action="#" method="post">
@@ -230,6 +244,9 @@ if (isset($_POST['modifier-solde'])) {
   <div class="card">
     <?php echo $user_found['Pseudo'] . " " . $user_found['Mail'] ?>
   </div>
+  <br>
+  <br>
+  <br>
   <div class="article-cards">
   <p class="title">Ses articles :</p>
   <?php 
@@ -251,6 +268,7 @@ if (isset($_POST['modifier-solde'])) {
   </div>
   <?php
     } 
+  }
   ?>
 
 </body>

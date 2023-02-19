@@ -98,6 +98,9 @@ if(isset($_POST['confirm']) && $total > 0 && $total <= $_SESSION['solde']) {
       <li><a href="../account">Profile</a></li>
       <li><a href="../cart">Cart</a></li>
       <li><a href="../sell">Sell</a></li>
+      <?php if($_SESSION['role'] == "admin") {?>
+      <li><a href="../admin">Admin</a></li>
+      <?php }?>
     </ul>
   </nav>
 </header>
