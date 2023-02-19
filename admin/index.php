@@ -39,6 +39,34 @@ if(isset($_POST['delete-user'])){
   header('Location: ../admin');
 }
 
+$modif_user = false;
+if(isset($_POST['modif-user'])) {
+  $modif_user = true;
+}
+
+if(isset($_POST['confirm-modif-user'])) {
+  $modif_user = false;
+  $user_id = $_POST['modif-user'];
+  $new_pseudo = $_POST['new-pseudo'];
+  $new_role = $_POST['new-role'];
+
+  if($new_pseudo != "") {
+    $query_modif = "UPDATE user SET Pseudo = ? WHERE User_id = ?";
+    $modif = $BD->prepare($query_modif);
+    $modif->bindValue(1, $new_pseudo, PDO::PARAM_STR);
+    $modif->bindValue(2, $user_id, PDO::PARAM_INT);
+    $modif->execute();
+  }
+  if($new_role != "") {
+  $query_modif = "UPDATE user SET Role = ? WHERE User_id = ?";
+  $modif = $BD->prepare($query_modif);
+  $modif->bindValue(1, $new_role, PDO::PARAM_STR);
+  $modif->bindValue(2, $user_id, PDO::PARAM_INT);
+  $modif->execute();
+  }
+  header('Location: ../admin');
+}
+
 if(isset($_POST['delete-article'])){
   $article_id = $_POST['delete-article'];
   $delete_article_query = "DELETE FROM article WHERE Article_id = $article_id";
@@ -113,6 +141,11 @@ if(isset($_POST['delete-article'])){
       <form action="#" method="post">
         <button type="submit" name="modif-user" value="<?= $user[$i]['User_id'] ?>">Modifier</button>
         <button type="submit" name="delete-user" value="<?= $user[$i]['User_id'] ?>">Supprimer</button>
+        <?php if($modif_user == true){?>
+          <input type="text" placeholder="Pseudo" name="new-pseudo">
+          <input type="text" placeholder="Role" name="new-role">
+          <button type="input" name="confirm-modif-user">Confirm</button>
+        <?php }?>
       </form>
     </div>
 
@@ -124,7 +157,7 @@ if(isset($_POST['delete-article'])){
       <?php if($cart[$i]['Picture_link'] != "") {?>
       <img src="<?= $img_article?>" alt="photo article">
       <?php } ?>
-      <p><?= $cart[$i]['Name'] . " " . $cart[$i]['Price'] ?></p>
+      <p><?= $cart[$i]['Name'] . " " . $cart[$i]['Price'] . "€ "?></p>
       <form action="#" method="post">
         <button type="submit" name="modif-article" value="<?= $cart[$i]['Article_id'] ?>">Modifier</button>
         <button type="submit" name="delete-article" value="<?= $cart[$i]['Article_id'] ?>">Supprimer</button>

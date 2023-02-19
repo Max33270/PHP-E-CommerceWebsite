@@ -68,12 +68,32 @@ input[type="submit"]:hover {
 }
 
 .card {
-    float: left;
+    display: flex;
+    align-items: center;
     width: calc(33.33% - 20px);
     margin: 10px;
     background-color: white;
     box-shadow: 2px 2px 5px gray;
+}
+
+.card p {
     text-align: left;
+    margin: 0; /* pour enlever le margin par défaut du paragraphe */
+}
+
+.card form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card button {
+    cursor: pointer;
+    background-color: red;
+    border: 1px solid black;
+    border-radius: 3px;
+    color: black;
+    margin-left: 10px;
 }
 
 .card-article {
@@ -98,7 +118,8 @@ input[type="submit"]:hover {
     margin: 0; /* pour enlever le margin par défaut du paragraphe */
 }
 
-.card button {
-    text-align: right;
-
+.card-article form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }

@@ -149,7 +149,7 @@ h2 {
 .article-cards .card {
     width: calc(33.33% - 20px);
     margin-bottom: 20px;
-    height: 260px;
+    height: 130px;
 }
 
 
@@ -173,7 +173,7 @@ h2 {
 
 /* Partie user invoice */
 .invoice-cards {
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
 .invoice-cards .card {
@@ -191,6 +191,6 @@ h2 {
     font-weight: bold;
     font-size: 30px;
     width: 60%;
-    height: 170px;
+    height: 70px;
     box-shadow: 0px 1px grey;
 }

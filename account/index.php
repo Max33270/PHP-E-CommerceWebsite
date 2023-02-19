@@ -169,8 +169,8 @@ if(isset($_POST['edit-info'])) {
         <?php if($article[$i]['Picture_link'] != "") {?>
         <img src="<?php echo $article[$i]['Picture_link'];?>" alt="photo article">
         <?php } ?>
-        <p><?=$article[$i]['Name']?></p>
-        <p><?=$article[$i]['Description']?></p>
+        <p><?="Titre : " . $article[$i]['Name']?></p>
+        <p><?="Description : " . $article[$i]['Description']?></p>
         <p><?=$article[$i]['Price']. "€"?></p>
       </div>
     <?php

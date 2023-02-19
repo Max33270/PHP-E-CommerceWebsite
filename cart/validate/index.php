@@ -60,9 +60,9 @@ if(isset($_POST['address']) && isset($_POST['city']) && isset($_POST['postal']))
 
 <body>
     <form action="#" method="post">
-        <div><input type="text" placeholder="Address.." class="address" required></input></div>
-        <div><input type="text" placeholder="City.." class="city" required></input></div>
-        <div><input type="text" placeholder="Code postal.." class="postal" required></input></div>
+        <div><input type="text" placeholder="Address.." name="address" class="address" required></input></div>
+        <div><input type="text" placeholder="City.." name="city" class="city" required></input></div>
+        <div><input type="text" placeholder="Code postal.." name="postal" class="postal" required></input></div>
         <div><input type="submit" value="Confirm" class="validate_cart"></div>
     </form>
 </body>

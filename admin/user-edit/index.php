@@ -1,31 +1,5 @@
 <?php
-require_once '../../connect_bd.php';
 session_start();
-$BD = connect_BD();
-
-if(isset($_POST['confirm-info'])) {
-  if($_POST['new-pseudo'] != "") {
-    $_SESSION['pseudo'] = $_POST['new-pseudo'];
-    $new_pseudo = $_SESSION['pseudo'];
-    $new_pseudo_query = "UPDATE user SET Pseudo = ? WHERE User_id = ?";
-    $pseudo = $BD->prepare($new_pseudo_query);
-    $pseudo->execute([$new_pseudo, $_SESSION['user_id']]);
-  }
-  if($_POST['password'] != "" && $_POST['new-password'] != "" && $_POST['password'] == $_POST['new-password']) {
-    $new_password = $_POST['password'];
-    // Hash password
-    $options = [
-      'cost' => 12, // coût de calcul
-    ];
-
-    $hashed_password = password_hash($new_password, PASSWORD_BCRYPT, $options);
-
-    $new_password_query = "UPDATE user SET Password = ? WHERE User_id = ?";
-    $password = $BD->prepare($new_password_query);
-    $password->execute([$hashed_password, $_SESSION['user_id']]);
-  }
-  header('Location: ../../account');
-}
 ?>
 
 <!DOCTYPE html>
@@ -34,8 +8,8 @@ if(isset($_POST['confirm-info'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/edit.css">
-    <title>Edit</title>
+    <link rel="stylesheet" href="../../styles/user-edit.css">
+    <title>User-edit</title>
 </head>
 <script>
     // Sélectionnez la navbar
@@ -57,7 +31,6 @@ if(isset($_POST['confirm-info'])) {
     window.onscroll = function() {stickyNavbar()};
   </script>
 
-  
 <header class="header sticky">
   <nav>
     <ul>
@@ -66,7 +39,7 @@ if(isset($_POST['confirm-info'])) {
       <li><a href="../../cart/">Cart</a></li>
       <li><a href="../../sell/">Sell</a></li>
       <?php if($_SESSION['role'] == "admin") {?>
-      <li><a href="../../admin">Admin</a></li>
+      <li><a href="../admin">Admin</a></li>
       <?php }?>
     </ul>
   </nav>
@@ -76,12 +49,7 @@ if(isset($_POST['confirm-info'])) {
     <div class="user-info">
         <form action="#" method="post">
             <input type="text" placeholder="Pseudo" name="new-pseudo">
-            <br>
-            <input type="text" placeholder="Password" name="password">
-            <br>
-            <input type="text" placeholder="New password" name="new-password">
-            <br>
-            <button type="submit" name="confirm-info">Confirm</button>
+            <input type="text" placeholder="Role" name="new-role">
         </form>
     </div>
 </body>
